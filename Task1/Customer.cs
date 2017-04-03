@@ -20,11 +20,11 @@ namespace Task1
             Revenue = revenue;
         }
 
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
-        public string ContactPhone { get; private set; }
+        public string ContactPhone { get; set; }
 
-        public decimal Revenue { get; private set; }
+        public decimal Revenue { get; set; }
 
         public override string ToString() => ToString("G", CultureInfo.CurrentCulture);
 
@@ -34,9 +34,16 @@ namespace Task1
                 format = "G";
             if (ReferenceEquals(formatProvider, null))
                 formatProvider = CultureInfo.CurrentCulture;
-            if (!(formatProvider is IFormatProvider))
-                formatProvider = CultureInfo.CurrentCulture;
-            throw new NotImplementedException();
+
+            switch (format.ToUpperInvariant())
+            {
+                case "NPR": return string.Format(formatProvider, "Customer record: {0}, {1}, {2}", Name, ContactPhone, Revenue);
+                case "NP": return string.Format(formatProvider, "Customer record: {0}, {1}", Name, ContactPhone);
+                case "NRP": return string.Format(formatProvider, "Customer record: {0}, {1}, {2}", Name, Revenue, ContactPhone);
+                default:
+                    throw new FormatException($"The {format} format string is not supported.");
+            }       
         }
     }
 }
+    
