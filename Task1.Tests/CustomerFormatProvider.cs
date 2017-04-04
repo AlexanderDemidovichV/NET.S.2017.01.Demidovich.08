@@ -10,7 +10,7 @@ namespace Task1.Tests
 {
     public class CustomerFormatProvider : IFormatProvider, ICustomFormatter
     {
-        private IFormatProvider parent;
+        private readonly IFormatProvider parent;
 
         public CustomerFormatProvider(IFormatProvider parent = null)
         {
@@ -35,7 +35,9 @@ namespace Task1.Tests
 
             switch (format.ToUpperInvariant())
             {
-                case "R": return string.Format(formatProvider, "{0}", customer.Revenue);
+                case "NPRD": return string.Format(formatProvider, "Customer record: {0}, {1}, {2:c}", customer.Name, customer.ContactPhone, customer.Revenue);
+                case "NRD": return string.Format(formatProvider, "Customer record: {0}, {1:c}", customer.Name, customer.Revenue);
+                case "RD": return string.Format(formatProvider, "Customer record: {0:c}", customer.Revenue);
                 default: return string.Format(parent, "{0:" + format + "}", arg);
             }
         }

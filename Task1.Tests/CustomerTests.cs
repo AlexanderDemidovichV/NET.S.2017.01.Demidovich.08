@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Task1.Tests
 {
+    [TestFixture]
     public class CustomerTests
     {
         public IEnumerable<TestCaseData> CustomerFormatting_TestData
@@ -24,7 +25,6 @@ namespace Task1.Tests
                 yield return new TestCaseData("N", customer).Returns("Jeffrey Richter");
                 yield return new TestCaseData("P", customer).Returns("+1 (425) 555-0100");
                 yield return new TestCaseData("R", customer).Returns("1,000,000.00");
-                yield return new TestCaseData("F", customer).Throws(typeof(FormatException));
             }
         }
 
@@ -52,8 +52,6 @@ namespace Task1.Tests
                 yield return new TestCaseData(fp, "N", customer).Returns("Jeffrey Richter");
                 yield return new TestCaseData(fp, "P", customer).Returns("+1 (425) 555-0100");
                 yield return new TestCaseData(fp, "R", customer).Returns("1,000,000.00");
-                yield return new TestCaseData(fp, "F", customer).Throws(typeof(FormatException));
-
             }
         }
 

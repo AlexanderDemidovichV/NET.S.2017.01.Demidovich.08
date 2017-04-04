@@ -82,12 +82,14 @@ namespace Task1
 
             switch (format.ToUpperInvariant())
             {
-                case "NPR": return string.Format(formatProvider, "Customer record: {0}, {1}, {2}", Name, ContactPhone, Revenue);
-                case "NP": return string.Format(formatProvider, "Customer record: {0}, {1}", Name, ContactPhone);
-                case "NRP": return string.Format(formatProvider, "Customer record: {0}, {1}, {2}", Name, Revenue, ContactPhone);
-                case "N": return string.Format(formatProvider, "Customer record: {0}", Name);
-                case "P": return string.Format(formatProvider, "Customer record: {0}",  ContactPhone);
-                case "NR": return string.Format(formatProvider, "Customer record: {0}, {1}", Name, Revenue);
+                case "G":
+                case "NPR": return string.Format(formatProvider, "{0}, {1}, {2:N}", Name, ContactPhone, Revenue);
+                case "NP": return string.Format(formatProvider, "{0}, {1}", Name, ContactPhone);
+                case "NR": return string.Format(formatProvider, "{0}, {1:N}", Name, Revenue);
+                case "PR": return string.Format(formatProvider, "{0}, {1:N}", ContactPhone, Revenue);
+                case "N": return string.Format(formatProvider, "{0}", Name);
+                case "P": return string.Format(formatProvider, "{0}", ContactPhone);
+                case "R": return string.Format(formatProvider, "{0:N}", Revenue);
                 default:
                     throw new FormatException($"The {format} format string is not supported.");
             }       
