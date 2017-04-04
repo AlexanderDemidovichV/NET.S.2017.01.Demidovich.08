@@ -26,7 +26,7 @@ namespace Task1.Tests
                 throw new ArgumentNullException();
 
             if (!this.Equals(formatProvider))
-                return null;
+                formatProvider = CultureInfo.CurrentCulture;
 
             if (string.IsNullOrEmpty(format) || !(arg is Customer))
                 return string.Format(parent, "{0:" + format + "}", arg);

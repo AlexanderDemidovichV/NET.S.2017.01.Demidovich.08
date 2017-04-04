@@ -42,17 +42,17 @@ namespace Task1
         /// <summary>
         /// Contains value of customer's name.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; }
 
         /// <summary>
         /// Contains value of customer's phone number.
         /// </summary>
-        public string ContactPhone { get; set; }
+        public string ContactPhone { get; }
 
         /// <summary>
         /// Contains value of customer's revenue.
         /// </summary>
-        public decimal Revenue { get; set; }
+        public decimal Revenue { get; }
 
         #endregion
 
