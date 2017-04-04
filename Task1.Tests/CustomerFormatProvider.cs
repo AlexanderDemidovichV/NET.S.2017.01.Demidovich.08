@@ -10,7 +10,15 @@ namespace Task1.Tests
 {
     public class CustomerFormatProvider : IFormatProvider, ICustomFormatter
     {
-        public object GetFormat(Type formatType) => formatType == typeof(ICustomFormatter) ? this : null;
+        private IFormatProvider parent;
+
+        public CustomerFormatProvider(IFormatProvider parent = null)
+        {
+            this.parent = parent ?? CultureInfo.CurrentCulture;
+        }
+
+        public object GetFormat(Type formatType) =>
+            formatType == typeof(ICustomFormatter) ? this : null;
 
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
@@ -21,14 +29,14 @@ namespace Task1.Tests
                 return null;
 
             if (string.IsNullOrEmpty(format) || !(arg is Customer))
-                return string.Format(null, "{0:" + format + "}", arg);
+                return string.Format(parent, "{0:" + format + "}", arg);
 
             Customer customer = (Customer)arg;
 
             switch (format.ToUpperInvariant())
             {
-                case "R": return string.Format(formatProvider, $"{customer.Revenue}");
-                default: return string.Format(null, "{0:" + format + "}", arg);
+                case "R": return string.Format(formatProvider, "{0}", customer.Revenue);
+                default: return string.Format(parent, "{0:" + format + "}", arg);
             }
         }
     }

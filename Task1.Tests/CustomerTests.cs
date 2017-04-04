@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace Task1.Tests
 {
+    [TestFixture]
     public class CustomerTests
     {
         public IEnumerable<TestCaseData> CustomerFormatting_TestData
-        {   
+        {
             get
             {
                 Customer customer = new Customer() { Name = "Jeffrey Richter", ContactPhone = "+1 (425) 555-0100", Revenue = 1000000 };
@@ -20,11 +21,12 @@ namespace Task1.Tests
             }
         }
 
-        [Test, TestCaseSource("CustomerFormatting_TestData")]
-        public static string testCustomerFormatting(string format, IFormattable customer)
+        [Test]
+        [TestCaseSource("CustomerFormatting_TestData")]
+        public static string CustomerFormatting_Test_Yeild(string format, Customer customer)
         {
-            return string.Format(format, customer);
+            return string.Format("{0:" + format + "}", customer);
         }
-       
+
     }
 }
